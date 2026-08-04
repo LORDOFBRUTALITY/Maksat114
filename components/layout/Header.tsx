@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Container from "@/components/ui/Container";
+import DonationButton from "@/components/donation/DonationButton";
 import MobileMenu from "./MobileMenu";
 
 const navLinks = [
@@ -14,40 +15,42 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/[0.04]">
-      <Container className="flex items-center justify-between h-16 lg:h-20 pr-16 lg:pr-28">
-        <a href="/" className="font-display text-xl font-semibold tracking-tight">
+    <header className="sticky top-0 z-50 border-b border-black/[0.04] bg-white/85 backdrop-blur-md">
+      <Container className="flex h-16 items-center justify-between gap-4 lg:h-20">
+        <a href="/" className="shrink-0 font-display text-xl font-semibold tracking-tight">
           Maksat<span className="text-accent">114</span>
         </a>
 
         {/* Masaüstü nav */}
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className="hidden flex-1 items-center justify-center gap-9 md:flex">
           {navLinks.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              className="text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* Sağ blok: bağış rozeti + CTA + hamburger — hepsi aynı hizada, çakışmaz */}
+        <div className="flex shrink-0 items-center gap-3 md:gap-4">
+          <DonationButton />
+
           <a
             href="#konum"
-            className="hidden md:inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-accent hover:bg-accent-dark transition-colors"
+            className="hidden items-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-accent transition-colors hover:bg-accent-dark md:inline-flex"
           >
             Bize Katıl
           </a>
 
-          {/* Mobil hamburger */}
           <button
             aria-label="Menüyü aç"
             onClick={() => setOpen(true)}
-            className="md:hidden grid place-items-center w-11 h-11 -mr-2 rounded-full active:bg-black/5 transition-colors"
+            className="grid h-11 w-11 place-items-center rounded-full transition-colors active:bg-black/5 md:hidden"
           >
-            <span className="relative block w-5 h-[2px] bg-ink before:content-[''] before:absolute before:w-5 before:h-[2px] before:bg-ink before:-translate-y-[7px] after:content-[''] after:absolute after:w-5 after:h-[2px] after:bg-ink after:translate-y-[7px]" />
+            <span className="relative block h-[2px] w-5 bg-ink before:absolute before:h-[2px] before:w-5 before:-translate-y-[7px] before:bg-ink before:content-[''] after:absolute after:h-[2px] after:w-5 after:translate-y-[7px] after:bg-ink after:content-['']" />
           </button>
         </div>
       </Container>
