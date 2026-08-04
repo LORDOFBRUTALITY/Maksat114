@@ -1,7 +1,14 @@
+"use client";
+
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/motion/Reveal";
+import { useContent } from "@/components/providers/ContentProvider";
 
 export default function LocationSection() {
+  const { content } = useContent();
+  const { location } = content;
+
   return (
     <section id="konum" className="bg-bg-soft py-20 lg:py-28">
       <Container>
@@ -11,13 +18,10 @@ export default function LocationSection() {
               Ulaşım
             </span>
             <h2 className="mt-3 font-display text-3xl font-semibold leading-tight sm:text-4xl">
-              Çat Kapı Gelebilirsiniz
+              {location.title}
             </h2>
             <p className="mt-5 max-w-md leading-relaxed text-ink-soft">
-              Yerimiz Altınşehir Metro İstasyonu&apos;nun hemen karşısında.
-              Ulaşım derdi yok. Aklınızda soru işareti kalmasın; Maksat
-              114&apos;e gelirken çok düşünmenize gerek yok, çat kapı
-              gelebilirsiniz. 🙂
+              {location.text}
             </p>
             <a
               href="https://maps.google.com"
@@ -30,25 +34,27 @@ export default function LocationSection() {
           </Reveal>
 
           <Reveal direction="left" delay={0.1}>
-            <div className="rounded-xl2 bg-white p-8 shadow-soft sm:p-10">
+            <div className="rounded-xl2 bg-accent p-8 text-white shadow-accent sm:p-10">
               <h3 className="font-display text-xl font-semibold">
-                Net Kural
+                {location.ruleTitle}
               </h3>
-              <p className="mt-4 leading-relaxed text-ink-soft">
-                Gençlik merkezimizde gördüğünüz, yediğiniz, içtiğiniz veya
-                oynadığınız her şey bizim ikramımızdır. Sizden hiçbir maddi
-                talepte bulunulmaz. Hayat koşturmacası içinde eğlenmek,
-                öğrenmek ve sosyalleşmek istiyorsan yerin hazır!
+              <p className="mt-4 leading-relaxed text-white/85">
+                {location.ruleText}
               </p>
-              <a
-                href="/bagis"
-                className="mt-6 inline-flex items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-accent transition-transform active:scale-[0.98]"
-              >
-                Yine de Destek Olmak İstersen
-              </a>
             </div>
           </Reveal>
         </div>
+
+        {/* Minimal, göze batmayan alternatif destek alanı — dikkat çekici bir CTA değil, sade bir not */}
+        <Reveal direction="fade" delay={0.15}>
+          <p className="mt-10 text-center text-xs text-ink-faint">
+            {location.donationNote}{" "}
+            <Link href="/bagis" scroll={false} className="font-medium text-accent hover:underline">
+              Buradan ulaşabilirsin
+            </Link>
+            .
+          </p>
+        </Reveal>
       </Container>
     </section>
   );
