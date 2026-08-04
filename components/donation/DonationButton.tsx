@@ -3,18 +3,23 @@
 import Link from "next/link";
 import BookFeatherIcon from "@/components/icons/BookFeatherIcon";
 
+/**
+ * Artık sayfa üzerinde "fixed" değil — Header'ın flex akışı içinde,
+ * logo ve menü ile aynı hizada, nizami şekilde yer alır.
+ * Header "sticky" olduğu için scroll'da zaten görünür kalır.
+ */
 export default function DonationButton() {
   return (
     <Link
       href="/bagis"
       scroll={false}
       aria-label="Bağış yap"
-      className="group fixed z-[70] top-3 right-3 md:top-6 md:right-8 flex flex-col items-center gap-1"
+      className="group flex shrink-0 flex-col items-center gap-0.5"
     >
-      <span className="grid place-items-center w-11 h-11 md:w-14 md:h-14 rounded-full bg-white shadow-soft border border-black/[0.06] text-ink group-hover:text-accent group-hover:border-accent/30 group-active:scale-95 transition-all">
-        <BookFeatherIcon className="w-5 h-5 md:w-6 md:h-6" />
+      <span className="grid h-10 w-10 place-items-center rounded-full border border-accent/20 bg-accent-soft text-accent-dark transition-all group-hover:bg-accent group-hover:text-white group-active:scale-95 md:h-11 md:w-11">
+        <BookFeatherIcon className="h-4.5 w-4.5 md:h-5 md:w-5" />
       </span>
-      <span className="text-[9px] md:text-[10px] font-semibold tracking-wide text-ink-soft group-hover:text-accent transition-colors">
+      <span className="text-[8px] font-semibold tracking-wide text-ink-soft transition-colors group-hover:text-accent md:text-[9px]">
         BAĞIŞ
       </span>
     </Link>
